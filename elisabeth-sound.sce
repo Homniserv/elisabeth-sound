@@ -10,9 +10,11 @@ f = fullfile( '/home/peter/POUB/elisabeth-sound/Voix 087_sdElisabethBoulotHandDr
 
 //b2 = fullfile( '/home/peter/POUB/velo-piste-countdown-Scilab-sound-track-Matlab/b2.wav');
 
- 
+//TODO quieter
+volume=1//volume/2
+
 //[x,y]=loadwave(filename);
-[x1,y1]=loadwave(f);
+[ys,info]=loadwave(f);
 disp( "info=")
 //x2=loadwave(b2);
 //sound(x/2)
@@ -21,7 +23,7 @@ disp( "info=")
 //plot2d(x)
 //plot(x)
 playsnd(f)
- 
+
 
 //playsnd(b2)
 //sleep(1000)
@@ -31,26 +33,26 @@ playsnd(f)
 //beep()
 //sleep(5)
 //beep('off') 
-disp("y1")
-y1
-//duree size(x1)(1,2) 47128.
-//x1 mat lign ~ hor x1(1,3)
-//disp(size(x1)(1,2)/44100) 
+disp("info")
+info
+//duree size(ys)(1,2) 47128.
+//ys mat lign ~ hor ys(1,3)
+//disp(size(ys)(1,2)/44100) 
 //disp(size(x2)(1,2)/44100) 
 
-//max(x1(1,:))
+//max(ys(1,:))
 //0.0806885
 //ralenti
-//x1poub=x1*2;
+//yspoub=ys*2;
 //x2poub=x2*2;
 //playsnd(f)
-//playsnd(x1poub)
+//playsnd(yspoub)
 sleep(1000)
-playsnd(x1,44100)
+playsnd(ys,44100)
 //default 22kHz
 
 //sleep(500)
-//playsnd(x1poub)
+//playsnd(yspoub)
 
 //sleep(1000)
 
@@ -60,26 +62,31 @@ playsnd(x1,44100)
 
 //reverse
 
-//data=mapsound(x1,.1,22050,44100)
+//data=mapsound(ys,.1,22050,44100)
 //default 22kHz
 
-//analyze(x1)
+//analyze(ys)
 a=[1 2 3]
 r=a(3:1)
 r
 
-function yNew=resampling(x,y,xNew)
+function yNewMAT=resampling(x,y,xNew)
     // xNew smaller included in x
     xSov=x
     ySov=y
     //recursive
-  if norm(a-(a+e),1) > %eps,
-    e=e/2;
-    k=k+1;
-end
+    if ((xNew(1)>=x(1))& ((xNew(1)<=x(2)))) then
+        //yNewMAT=(ySov(1)+(xNew(1)-xSov(1))*(ySov(2)-ySov(1))/(xSov(2)-xSov(1)))):resampling(x(2:$),y(2:$),xNew(2:$)) //xNew(1) 1!!!! tjs
+        yNewMAT=[1 2]
+    elseif (xNew(1)>x(2)) then
+            yNewMAT=resampling(x(2:$),y(2:$),xNew(1:$))
+    else 
+        yNewMAT=[9999]
+    end
 endfunction
+
 resampling([1 2 3],[10 20 30],[1.5 2.2 3])//-> [15 22 30]
 
 
-//plot(x1)
+//plot(ys)
 //by Peter MOUEZA

@@ -64,5 +64,22 @@ playsnd(x1,44100)
 //default 22kHz
 
 //analyze(x1)
+a=[1 2 3]
+r=a(3:1)
+r
 
-plot(x1)
+function yNew=resampling(x,y,xNew)
+    // xNew smaller included in x
+    xSov=x
+    ySov=y
+    //recursive
+  if norm(a-(a+e),1) > %eps,
+    e=e/2;
+    k=k+1;
+end
+endfunction
+resampling([1 2 3],[10 20 30],[1.5 2.2 3])//-> [15 22 30]
+
+
+//plot(x1)
+//by Peter MOUEZA

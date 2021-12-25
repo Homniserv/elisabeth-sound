@@ -10,8 +10,7 @@ f = fullfile( '/home/peter/POUB/elisabeth-sound/Voix 087_sdElisabethBoulotHandDr
 
 //b2 = fullfile( '/home/peter/POUB/velo-piste-countdown-Scilab-sound-track-Matlab/b2.wav');
 
-//TODO quieter
-volume=1//volume/2
+
 
 //[x,y]=loadwave(filename);
 [ys,info]=loadwave(f);
@@ -22,7 +21,7 @@ disp( "info=")
 //drawnow()
 //plot2d(x)
 //plot(x)
-playsnd(f)
+//playsnd(f) OK
 
 
 //playsnd(b2)
@@ -47,8 +46,12 @@ info
 //x2poub=x2*2;
 //playsnd(f)
 //playsnd(yspoub)
-sleep(1000)
-playsnd(ys,44100)
+//sleep(1000) OK
+
+//TODO quieter
+volume=.1//volume/2
+
+playsnd(ys*volume,44100)
 //default 22kHz
 
 //sleep(500)
@@ -76,12 +79,17 @@ function yNewMAT=resampling(x,y,xNew)
     ySov=y
     //recursive
     if ((xNew(1)>=x(1))& ((xNew(1)<=x(2)))) then
-        //yNewMAT=(ySov(1)+(xNew(1)-xSov(1))*(ySov(2)-ySov(1))/(xSov(2)-xSov(1)))):resampling(x(2:$),y(2:$),xNew(2:$)) //xNew(1) 1!!!! tjs
-        yNewMAT=[1 2]
+        disp( "lbl1 if1")
+        yNewMAT=[[(ySov(1)+(xNew(1)-xSov(1))*(ySov(2)-ySov(1))/(xSov(2)-xSov(1)))],resampling(x(2:$),y(2:$),xNew(2:$))] //xNew(1) 1!!!! tjs
+        //yNewMAT=[1 2]
     elseif (xNew(1)>x(2)) then
+        disp( "lbl2 if2")
             yNewMAT=resampling(x(2:$),y(2:$),xNew(1:$))
+
     else 
+        disp( "lbl3")
         yNewMAT=[9999]
+        yNewMAT
     end
 endfunction
 

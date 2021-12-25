@@ -84,7 +84,7 @@ function yNewMAT=resampling(x,y,xNew)
         //yNewMAT=[1 2]
     elseif (xNew(1)>x(2)) then
         disp( "lbl2 if2")
-            yNewMAT=resampling(x(2:$),y(2:$),xNew(1:$))
+        yNewMAT=resampling(x(2:$),y(2:$),xNew(1:$))
 
     else 
         disp( "lbl3")

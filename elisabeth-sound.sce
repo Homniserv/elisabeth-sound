@@ -72,3 +72,5 @@ playsnd(ys*volume,44100)
 a=[1 2 3]
 r=a(3:1)
 r
+
+resamplingNb(1:1:length(ys(1,:)), ys(1,:) , 5    )

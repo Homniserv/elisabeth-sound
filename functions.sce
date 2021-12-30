@@ -16,12 +16,12 @@ function yResMAT=resampling(x,y,xRequest)
     else
         disp( "lbl4")
         yResMAT=[3333]
-        yResMAT
+        //yResMAT
 
         if (length(xSov)==1) then
             disp( "lbl.5 n arrive jamais si on part de self")
             yResMAT=[0000]
-            yResMAT
+            //yResMAT
         elseif (length(xSov)>=2) then
             if ((xRequest(1)>=xSov(1))& ((xRequest(1)<=xSov(2)))) then
                 interpolated=(ySov(1)+(xRequest(1)-xSov(1))*(ySov(2)-ySov(1))/(xSov(2)-xSov(1)))
@@ -30,20 +30,21 @@ function yResMAT=resampling(x,y,xRequest)
                 yResMAT=[interpolated,resampling([xRequest(1),xSov(2:$)],[interpolated,ySov(2:$)],xRequest(2:$))] //xRequest(1) 1!!!! tjs
                 //yResMAT=[1 2]
                 disp( "lbl2  yResMAT")
-                disp(yResMAT)
+                //disp(yResMAT)
             elseif (xRequest(1)>xSov(2)) then
                 disp( "lbl2 if2")
                 yResMAT=resampling(xSov(2:$),ySov(2:$),xRequest(1:$))
-                disp(yResMAT)
+                //disp(yResMAT)
 
             else 
                 disp( "lbl3")
                 yResMAT=[9999]
-                yResMAT
+                //yResMAT
             end
         else
+               disp( "lbl4")
             yResMAT=[1111]
-            yResMAT
+            //yResMAT
         end
 
     end
@@ -56,6 +57,6 @@ resampling([1 2 3],[10 20 30],[1.5 2.2 2.5 3])//-> [15 22 25 30]
 //by Peter MOUEZA
 
 function yResMAT=resamplingNb(x,y,nb)
-     yResMAT=resampling(x,y,linspace(x(1),length(x),nb))
+     yResMAT=resampling(x,y,linspace(x(1),x(length(x)),nb))
 endfunction
 resamplingNb([1 2 3],[10 20 30],5)

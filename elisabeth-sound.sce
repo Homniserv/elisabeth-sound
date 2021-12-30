@@ -72,38 +72,3 @@ playsnd(ys*volume,44100)
 a=[1 2 3]
 r=a(3:1)
 r
-
-function yNewMAT=resampling(x,y,xNew)
-    // xNew smaller included in x
-    //x supposé rodonné
-    xSov=x
-    ySov=y
-
-    disp( "lbl0 xSov = ")
-    disp( xSov)
-
-    //recursive
-    if ((xNew(1)>=xSov(1))& ((xNew(1)<=xSov(2)))) then
-        interpolated=(ySov(1)+(xNew(1)-xSov(1))*(ySov(2)-ySov(1))/(xSov(2)-xSov(1)))
-          disp( "lbl1 if1 interpolated=")
-        disp(interpolated)
-        yNewMAT=[interpolated,resampling(xSov(2:$),ySov(2:$),xNew(2:$))] //xNew(1) 1!!!! tjs
-        //yNewMAT=[1 2]
-          disp( "lbl2  yNewMAT")
-        disp(yNewMAT)
-    elseif (xNew(1)>xSov(2)) then
-        disp( "lbl2 if2")
-        yNewMAT=resampling(xSov(2:$),ySov(2:$),xNew(1:$))
-        disp(yNewMAT)
-    else 
-        disp( "lbl3")
-        yNewMAT=[9999]
-        yNewMAT
-    end
-endfunction
-
-resampling([1 2 3],[10 20 30],[1.5 2.2 2.5 3])//-> [15 22 25 30]
-
-
-//plot(ys)
-//by Peter MOUEZA
